@@ -1,0 +1,6 @@
+output
+packer_cache
+cloud-init/ssh/*
+!cloud-init/ssh/.gitkeep
+cloud-init/user-data
+crash.log

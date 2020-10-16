@@ -1,0 +1,31 @@
+{
+  "builders": [
+    {
+      "type": "qemu",
+      "name": "base",
+      "headless": false,
+      "disk_size": "10G",
+      "memory": "1024",
+      "format": "qcow2",
+      "iso_url": "http://mirrors.rit.edu/centos/7/isos/x86_64/CentOS-7-x86_64-NetInstall-2003.iso",
+      "iso_checksum": "sha256:101bc813d2af9ccf534d112cbe8670e6d900425b297d1a4d2529c5ad5f226372",
+      "vm_name": "base.qcow2",
+      "output_directory": "output/{{ build_name }}",
+      "http_directory": "images/base",
+      "floppy_files": [
+        "cloud-init/meta-data",
+        "cloud-init/user-data"
+      ],
+      "floppy_label": "cidata",
+      "ssh_username": "centos",
+      "ssh_private_key_file": "cloud-init/ssh/packer-key_rsa",
+      "ssh_timeout": "20m",
+      "ssh_port": 22,
+      "boot_wait": "10s",
+      "boot_command": [
+        "<up><wait><tab><wait> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ],
+      "shutdown_command": "sudo shutdown -P now"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "builders": [
+    {
+      "type": "qemu",
+      "name": "kernel",
+      "headless": false,
+      "disk_size": "10G",
+      "memory": "1024",
+      "format": "qcow2",
+      "iso_url": "output/base/base.qcow2",
+      "iso_checksum": "none",
+      "disk_image": true,
+      "vm_name": "kernel.qcow2",
+      "output_directory": "output/{{ build_name }}",
+      "floppy_files": [
+        "cloud-init/meta-data",
+        "cloud-init/user-data"
+      ],
+      "floppy_label": "cidata",
+      "ssh_username": "centos",
+      "ssh_private_key_file": "cloud-init/ssh/packer-key_rsa",
+      "ssh_port": 22,
+      "shutdown_command": "sudo shutdown -P now"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "images/kernel/site.yml"
+    }
+  ]
+}
