@@ -26,7 +26,13 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "images/kernel/site.yml"
+      "ansible_env_vars": [
+        "ANSIBLE_RETRY_FILES_ENABLED=0"
+      ],
+      "extra_arguments": [
+        "-v"
+      ],
+      "playbook_file": "images/kernel/ansible/site.yml"
     }
   ]
 }
