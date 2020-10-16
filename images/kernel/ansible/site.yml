@@ -33,7 +33,6 @@
       yum:
         name:
           - kernel-ml
-          - kernel-ml-headers
           - kernel-ml-tools
 
     - name: REBOOT TO TEST KERNEL

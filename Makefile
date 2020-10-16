@@ -6,10 +6,7 @@ build-%:
 	rm -rf output/$*
 	packer build ./images/$*/packer.json
 
-build: generate build-base
-
-convert-%:
-	qemu-img convert -f qcow2 -O vmdk output/$*/$*.qcow2 output/$*/$*.vmdk 
+build: generate build-base build-kernel
 
 clean:
 	rm -rf output

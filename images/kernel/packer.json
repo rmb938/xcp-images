@@ -34,5 +34,13 @@
       ],
       "playbook_file": "images/kernel/ansible/site.yml"
     }
+  ],
+  "post-processors": [
+    {
+      "type": "shell-local",
+      "inline": [
+        "qemu-img convert -f qcow2 -O vmdk output/${PACKER_BUILD_NAME}/${PACKER_BUILD_NAME}.qcow2 output/${PACKER_BUILD_NAME}/${PACKER_BUILD_NAME}.vmdk "
+      ]
+    }
   ]
 }

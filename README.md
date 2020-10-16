@@ -16,8 +16,7 @@ for cloud-init.
 
 1. Build the Base and Kernel Images: `make build`
 1. Build any additional images: `make build-$image`
-1. Convert final image to vmdk: `make convert-$image`
-1. Import Disk into Xen Orchestra and create a VM with cloud-init.
+1. Import the resulting `.vmdk` disks into Xen Orchestra and create a VM with cloud-init.
 
 ## Images
 
