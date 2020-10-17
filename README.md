@@ -4,6 +4,9 @@ XCP-ng Images
 Uses Qemu to build images Centos 7 compatible with XCP-ng. These images are configured 
 for cloud-init.
 
+These images are setup to use my own personal RPM mirrors. Some changes may be required to
+use these images yourself.
+
 ## How to use
 
 ### Requirements

@@ -7,7 +7,7 @@
       "disk_size": "10G",
       "memory": "1024",
       "format": "qcow2",
-      "iso_url": "http://mirrors.rit.edu/centos/7/isos/x86_64/CentOS-7-x86_64-NetInstall-2003.iso",
+      "iso_url": "http://mirrors.rmb938.me/centos/7/isos/x86_64/CentOS-7-x86_64-NetInstall-2003.iso",
       "iso_checksum": "sha256:101bc813d2af9ccf534d112cbe8670e6d900425b297d1a4d2529c5ad5f226372",
       "vm_name": "base.qcow2",
       "output_directory": "output/{{ build_name }}",

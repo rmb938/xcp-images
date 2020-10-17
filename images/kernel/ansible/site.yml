@@ -3,10 +3,19 @@
   name: KERNEL
   become: true
   tasks:
-    - name: INSTALL EPEL RELEASE
-      yum:
-        name: epel-release
+    - name: IMPORT EPEL KEY
+      rpm_key:
         state: present
+        key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+
+    - name: INSTALL EPEL RELEASE
+      yum_repository:
+        name: epel
+        description: Extra Packages for Enterprise Linux 7 - $basearch
+        baseurl: https://mirrors.rmb938.me/epel/$releasever/$basearch/
+        enabled: yes
+        gpgcheck: yes
+        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
 
     - name: INSTALL XE GUEST UTILS
       yum:
@@ -23,13 +32,15 @@
         state: present
         key: https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 
-    - name: INSTALL ELREPO
-      yum:
-        name: https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
-        state: present
-
-    - name: ENABLE ELREPO KERNEL
-      shell: yum-config-manager --enable elrepo-kernel
+    - name: INSTALL ELREPO KERNEL
+      yum_repository:
+        name: elrepo-kernel
+        file: elrepo
+        description: ELRepo.org Community Enterprise Linux Kernel Repository - el7
+        baseurl: https://mirrors.rmb938.me/elrepo/kernel/el7/$basearch/
+        enabled: yes
+        gpgcheck: yes
+        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org
 
     - name: CHANGE DEFAULT KERNEL TO KERNEL-ML
       copy:
@@ -52,3 +63,15 @@
 
     - name: REBOOT TO TEST KERNEL
       reboot:
+
+    - name: GATHER FACTS AGAIN
+      setup:
+
+    - name: KERNEL VERSION
+      debug:
+        msg: Kernel {{ ansible_kernel }}
+
+    - name: FAIL WHEN KERNEL DOESN'T MATCH
+      fail:
+        msg: Didn't boot into elrepo kernel
+      when: '"el7.elrepo.x86_64" not in ansible_kernel'
