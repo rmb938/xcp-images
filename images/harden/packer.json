@@ -2,15 +2,15 @@
   "builders": [
     {
       "type": "qemu",
-      "name": "kernel",
+      "name": "harden",
       "headless": false,
       "disk_size": "10G",
       "memory": "1024",
       "format": "qcow2",
-      "iso_url": "output/base/base.qcow2",
+      "iso_url": "output/kernel/kernel.qcow2",
       "iso_checksum": "none",
       "disk_image": true,
-      "vm_name": "kernel.qcow2",
+      "vm_name": "harden.qcow2",
       "output_directory": "output/{{ build_name }}",
       "floppy_files": [
         "cloud-init/meta-data",
@@ -32,7 +32,15 @@
       "extra_arguments": [
         "-v"
       ],
-      "playbook_file": "images/kernel/ansible/site.yml"
+      "playbook_file": "images/harden/ansible/site.yml"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "shell-local",
+      "inline": [
+        "qemu-img convert -f qcow2 -O vmdk output/${PACKER_BUILD_NAME}/${PACKER_BUILD_NAME}.qcow2 output/${PACKER_BUILD_NAME}/${PACKER_BUILD_NAME}.vmdk "
+      ]
     }
   ]
 }

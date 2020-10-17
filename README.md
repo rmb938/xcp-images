@@ -34,3 +34,6 @@ This image also enables epel to install `xe-guest-utilities-latest`
 
 http://elrepo.org/tiki/HomePage
 
+### Harden
+
+A hardened version of the Kernel image

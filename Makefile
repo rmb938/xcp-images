@@ -6,7 +6,7 @@ build-%:
 	rm -rf output/$*
 	packer build ./images/$*/packer.json
 
-build: generate build-base build-kernel
+build: generate build-base build-kernel build-harden
 
 clean:
 	rm -rf output

@@ -1,0 +1,19 @@
+---
+- hosts: all
+  name: HARDEN
+  become: true
+  roles:
+    - 1_1_filesystem_configuration
+    - 1_5_additional_process_hardening
+    - 2_2_special_purpose_services
+    - 3_1_network_parameters_host_only
+    - 3_2_network_parameters_host_and_router
+    - 3_3_ipv6
+    - 3_5_uncommon_network_protocols
+    - 5_2_ssh_server_configuration
+
+# TODO: https://github.com/dev-sec/cis-dil-benchmark
+# inspec exec git@github.com:dev-sec/cis-dil-benchmark.git --target ssh://centos@127.0.0.1 --sudo --reporter cli html:index.html
+# Current build as of 10/16/20: 1166 examples, 244 failures, 53 pending
+
+# TODO: is there a centos 7 CIS benchmark that will be better?
