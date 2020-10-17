@@ -3,6 +3,21 @@
   name: KERNEL
   become: true
   tasks:
+    - name: INSTALL EPEL RELEASE
+      yum:
+        name: epel-release
+        state: present
+
+    - name: INSTALL XE GUEST UTILS
+      yum:
+        name: xe-guest-utilities-latest
+        state: present
+
+    - name: ENABLE AND START XE
+      systemd:
+        name: xe-linux-distribution
+        enabled: yes
+
     - name: IMPORT ELREPO KEY
       rpm_key:
         state: present

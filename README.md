@@ -26,7 +26,8 @@ A Base Centos 7 install with no customization
 
 ### Kernel
 
-A Centos 7 install with kernel-ml installed from ELRepo
+A Centos 7 install with kernel-ml installed from ELRepo.
+This image also enables epel to install `xe-guest-utilities-latest`
 
 http://elrepo.org/tiki/HomePage
 
